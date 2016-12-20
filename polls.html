@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge; charset=utf-8">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Чемпионат социологов | Singular Spectrum Analysis with R</title>
+
+  </head>
+
+  <body>
+    <style type="text/css">
+
+    table {
+    border-collapse: collapse;
+    border-spacing: 1px 1px;
+
+}
+
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+    </style>
+<h3>Личный зачёт Социологов-2016</h3><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Place</th>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>01</th>
+      <th>02</th>
+      <th>03</th>
+      <th>04</th>
+      <th>05</th>
+      <th>06</th>
+      <th>07</th>
+      <th>08</th>
+      <th>09</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>Sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>1</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c637819/v637819442/6844/XCfJZXVMbJQ.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id64027442'>Иван Овчинников</a></td>
+      <td><b>25</b> (1207)</td>
+      <td><b>25</b> (2049)</td>
+      <td><b>25</b> (1118)</td>
+      <td><b>25</b> (2014)</td>
+      <td><b>25</b> (2767)</td>
+      <td><b>25</b> (1347)</td>
+      <td><b>12</b> (443)</td>
+      <td><b>25</b> (960)</td>
+      <td><b>25</b> (1331)</td>
+      <td><b>25</b> (3451)</td>
+      <td><b>25</b> (2015)</td>
+      <td><b>15</b> (1390)</td>
+      <td><b>277</b></td>
+    </tr>
+    <tr>
+      <td><b>2</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c837633/v837633018/7546/7WX_h62D_2s.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id132042018'>Степан Игнатьев</a></td>
+      <td><b>12</b> (358)</td>
+      <td><b>8</b> (532)</td>
+      <td><b>18</b> (420)</td>
+      <td><b>15</b> (896)</td>
+      <td><b>1</b> (431)</td>
+      <td><b>8</b> (338)</td>
+      <td><b>25</b> (1811)</td>
+      <td><b>10</b> (393)</td>
+      <td><b>18</b> (829)</td>
+      <td><b>18</b> (1591)</td>
+      <td><b>10</b> (706)</td>
+      <td><b>18</b> (1567)</td>
+      <td><b>161</b></td>
+    </tr>
+    <tr>
+      <td><b>3</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c604719/v604719889/14632/X-JrLx7ieDc.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id34505889'>Альберт Масленников</a></td>
+      <td>0 (0)</td>
+      <td><b>15</b> (994)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>15</b> (1020)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>15</b> (478)</td>
+      <td><b>12</b> (361)</td>
+      <td><b>15</b> (885)</td>
+      <td><b>15</b> (1194)</td>
+      <td>0 (262)</td>
+      <td><b>87</b></td>
+    </tr>
+    <tr>
+      <td><b>4</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c412624/v412624850/592a/cQUy3uEC0PI.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id3002850'>Павел Кириллов</a></td>
+      <td><b>2</b> (137)</td>
+      <td><b>18</b> (1288)</td>
+      <td><b>10</b> (297)</td>
+      <td><b>12</b> (656)</td>
+      <td><b>4</b> (668)</td>
+      <td>0 (0)</td>
+      <td><b>10</b> (439)</td>
+      <td><b>1</b> (221)</td>
+      <td>0 (0)</td>
+      <td><b>6</b> (353)</td>
+      <td>0 (0)</td>
+      <td><b>10</b> (615)</td>
+      <td><b>73</b></td>
+    </tr>
+    <tr>
+      <td><b>5</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c419325/v419325515/be29/5SzlN9zGh-U.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id3324515'>Александр Медведев</a></td>
+      <td><b>15</b> (379)</td>
+      <td><b>12</b> (670)</td>
+      <td><b>8</b> (283)</td>
+      <td><b>6</b> (468)</td>
+      <td>0 (0)</td>
+      <td>0 (238)</td>
+      <td><b>1</b> (256)</td>
+      <td><b>18</b> (558)</td>
+      <td><b>2</b> (189)</td>
+      <td>0 (0)</td>
+      <td>0 (309)</td>
+      <td><b>1</b> (316)</td>
+      <td><b>63</b></td>
+    </tr>
+    <tr>
+      <td><b>6</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c9981/u12106857/e_f42b774e.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id12106857'>Андрей Ставицкий</a></td>
+      <td>0 (0)</td>
+      <td><b>10</b> (620)</td>
+      <td>0 (0)</td>
+      <td><b>18</b> (1718)</td>
+      <td><b>6</b> (671)</td>
+      <td><b>6</b> (325)</td>
+      <td>0 (252)</td>
+      <td>0 (0)</td>
+      <td><b>15</b> (606)</td>
+      <td><b>2</b> (266)</td>
+      <td><b>1</b> (344)</td>
+      <td>0 (0)</td>
+      <td><b>58</b></td>
+    </tr>
+    <tr>
+      <td><b>7</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c631418/v631418356/48c38/o2GhEqgmsgo.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id78506356'>Дима Ковалёв</a></td>
+      <td><b>10</b> (347)</td>
+      <td>0 (0)</td>
+      <td>0 (43)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>18</b> (1587)</td>
+      <td><b>25</b> (2388)</td>
+      <td><b>53</b></td>
+    </tr>
+    <tr>
+      <td><b>8</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c636826/v636826270/486a0/kr91j7DKIqU.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id94896270'>Алёна Линок</a></td>
+      <td><b>6</b> (181)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>15</b> (540)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>12</b> (568)</td>
+      <td>0 (0)</td>
+      <td><b>12</b> (816)</td>
+      <td><b>45</b></td>
+    </tr>
+    <tr>
+      <td><b>9</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c629208/v629208138/47bc3/s2asdVfSMSs.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id122083138'>Кирилл Родин</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>12</b> (863)</td>
+      <td>0 (0)</td>
+      <td><b>18</b> (767)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>30</b></td>
+    </tr>
+    <tr>
+      <td><b>10</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c637316/v637316641/e19f/NrtoGy7Rf28.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id27211641'>Rahman Bikmuhametov</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>10</b> (435)</td>
+      <td><b>8</b> (342)</td>
+      <td>0 (0)</td>
+      <td><b>10</b> (306)</td>
+      <td>0 (0)</td>
+      <td>0 (255)</td>
+      <td>0 (0)</td>
+      <td><b>28</b></td>
+    </tr>
+    <tr>
+      <td><b>11</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c638923/v638923639/111bf/dxuCan3rJBk.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id58639'>Сергей Швецов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>4</b> (252)</td>
+      <td><b>8</b> (690)</td>
+      <td>0 (0)</td>
+      <td><b>15</b> (753)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (302)</td>
+      <td><b>27</b></td>
+    </tr>
+    <tr>
+      <td><b>12</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c630019/v630019671/27e13/wXGkM17HjYI.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id3430671'>Леонид Древило</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>18</b> (1202)</td>
+      <td>0 (230)</td>
+      <td>0 (224)</td>
+      <td>0 (0)</td>
+      <td><b>8</b> (238)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>26</b></td>
+    </tr>
+    <tr>
+      <td><b>13</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c637927/v637927479/1cbff/RAYrkpA2ay8.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id9739479'>Никита Звонарев</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>8</b> (563)</td>
+      <td>0 (0)</td>
+      <td>0 (134)</td>
+      <td><b>6</b> (269)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>6</b> (637)</td>
+      <td>0 (0)</td>
+      <td><b>20</b></td>
+    </tr>
+    <tr>
+      <td><b>13</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c837634/v837634989/10407/Bn3IFIgWTtQ.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id114717989'>Дмитрий Шидловский</a></td>
+      <td><b>18</b> (1016)</td>
+      <td>0 (184)</td>
+      <td>0 (0)</td>
+      <td><b>2</b> (200)</td>
+      <td>0 (316)</td>
+      <td>0 (256)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>20</b></td>
+    </tr>
+    <tr>
+      <td><b>15</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c627927/v627927732/450c7/34syaiSLkVc.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id1111732'>Алексей Коляда</a></td>
+      <td>0 (0)</td>
+      <td><b>6</b> (342)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>1</b> (297)</td>
+      <td><b>2</b> (264)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>10</b> (427)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>19</b></td>
+    </tr>
+    <tr>
+      <td><b>16</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c628219/v628219507/1c544/FJ68lkZyN4M.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id125024507'>Владислав Дубас</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>18</b> (877)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>18</b></td>
+    </tr>
+    <tr>
+      <td><b>17</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c631920/v631920666/101ef/pSna-Ewp7d8.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id105570666'>Дмитрий Семин</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (128)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>12</b> (426)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>4</b> (523)</td>
+      <td>0 (120)</td>
+      <td><b>16</b></td>
+    </tr>
+    <tr>
+      <td><b>18</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c630329/v630329032/39fb0/Z7Xv6jBNG1w.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id35999032'>Иван Калинин</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>15</b> (362)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>15</b></td>
+    </tr>
+    <tr>
+      <td><b>19</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c836733/v836733169/c12e/0uy6iqfCnxU.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id45661169'>Иван Чекунов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (151)</td>
+      <td>0 (0)</td>
+      <td><b>6</b> (292)</td>
+      <td><b>6</b> (234)</td>
+      <td>0 (0)</td>
+      <td>0 (241)</td>
+      <td>0 (117)</td>
+      <td><b>12</b></td>
+    </tr>
+    <tr>
+      <td><b>19</b></td>
+      <td><img class = 'dude-img' src = 'http://vk.com/images/camera_50.png'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id33720028'>Максим Ыванович</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>12</b> (311)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>12</b></td>
+    </tr>
+    <tr>
+      <td><b>19</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c638218/v638218586/4d34/cpwxqx4Nq_k.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id57586'>Андрей Решетнёв</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>12</b> (475)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>12</b></td>
+    </tr>
+    <tr>
+      <td><b>19</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c836131/v836131607/150af/BxU5X2RSnCE.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id20436607'>Заил Сайдоян</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>12</b> (857)</td>
+      <td>0 (0)</td>
+      <td><b>12</b></td>
+    </tr>
+    <tr>
+      <td><b>23</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c626322/v626322771/3f327/5UVr98vGaKI.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id10103771'>Эндрю Кондоррр</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>10</b> (619)</td>
+      <td>0 (149)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (224)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>10</b></td>
+    </tr>
+    <tr>
+      <td><b>23</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c636130/v636130065/15a70/FyWIq0uIDZ8.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id9686065'>Дмитрий Кузнецов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>6</b> (325)</td>
+      <td>0 (0)</td>
+      <td><b>4</b> (280)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>10</b></td>
+    </tr>
+    <tr>
+      <td><b>23</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c626430/v626430050/56f9/p0Avq9ONcRI.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id356480050'>Данил Беляцкий</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>10</b> (699)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>10</b></td>
+    </tr>
+    <tr>
+      <td><b>26</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c638925/v638925495/12a5e/vJrqZQ8dwy8.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id158376495'>Alex Bondar</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (102)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>1</b> (255)</td>
+      <td>0 (0)</td>
+      <td><b>8</b> (565)</td>
+      <td><b>9</b></td>
+    </tr>
+    <tr>
+      <td><b>27</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c633720/v633720490/3827f/QLAvdmjpIDc.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id137766490'>Динар Хусаинов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (277)</td>
+      <td>0 (0)</td>
+      <td><b>8</b> (367)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>8</b></td>
+    </tr>
+    <tr>
+      <td><b>27</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c626822/v626822228/353db/b6cID4cTvg4.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id93641228'>Евгений Шевченко</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>8</b> (660)</td>
+      <td>0 (0)</td>
+      <td><b>8</b></td>
+    </tr>
+    <tr>
+      <td><b>27</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c636818/v636818760/5032/FIm_ZDsyB_E.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id28193760'>Дима Лозин</a></td>
+      <td>0 (0)</td>
+      <td><b>4</b> (270)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>4</b> (273)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>8</b></td>
+    </tr>
+    <tr>
+      <td><b>27</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c628219/v628219215/249b5/igSnwpknJS4.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id341220215'>Виктор Зимин</a></td>
+      <td><b>8</b> (215)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>8</b></td>
+    </tr>
+    <tr>
+      <td><b>27</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c637418/v637418150/203dc/LJAfMsAs2dM.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id799150'>Павел Зарубин</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>8</b> (398)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>8</b></td>
+    </tr>
+    <tr>
+      <td><b>32</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c604520/v604520549/384d8/X2KMmMZYWRk.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id12247549'>Дмитрий Чаусов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>6</b> (442)</td>
+      <td><b>6</b></td>
+    </tr>
+    <tr>
+      <td><b>32</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c636426/v636426746/2646b/Z9Mvx9jRSm0.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id94448746'>Юлиан Лермонтов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>6</b> (250)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>6</b></td>
+    </tr>
+    <tr>
+      <td><b>34</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c637931/v637931495/167c5/4L-Chw6KUBY.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id23109495'>Антон Дьяконов</a></td>
+      <td><b>1</b> (43)</td>
+      <td>0 (95)</td>
+      <td><b>4</b> (238)</td>
+      <td>0 (0)</td>
+      <td>0 (270)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>5</b></td>
+    </tr>
+    <tr>
+      <td><b>35</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c633122/v633122437/404ee/0SqmjeDhpn4.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id20204437'>Николай Гнед</a></td>
+      <td><b>4</b> (155)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>4</b></td>
+    </tr>
+    <tr>
+      <td><b>35</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c636416/v636416863/273f4/S_VbQCnk1a4.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id53812863'>Влад Сарро</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>4</b> (268)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>4</b></td>
+    </tr>
+    <tr>
+      <td><b>35</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c620927/v620927889/166fd/cKTpkMNWKM0.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id756889'>Виктор Стрельцов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>4</b> (406)</td>
+      <td><b>4</b></td>
+    </tr>
+    <tr>
+      <td><b>35</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c623322/v623322267/5c8ca/BppZ6OGqN6Q.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id2614267'>Макс Моисеев</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>4</b> (221)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>4</b></td>
+    </tr>
+    <tr>
+      <td><b>39</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c636629/v636629393/34c67/Y6ttT46U81k.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id268701393'>Максим Черепнов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>2</b> (298)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>2</b></td>
+    </tr>
+    <tr>
+      <td><b>39</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c630026/v630026012/3c1b2/9l6_6gYTSxw.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id155901012'>Тима Сыздыков</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>2</b> (209)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>2</b></td>
+    </tr>
+    <tr>
+      <td><b>39</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c628426/v628426364/10770/9GTjuN0Cf3I.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id112955364'>Алексей Лекомцев</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>2</b> (347)</td>
+      <td>0 (0)</td>
+      <td><b>2</b></td>
+    </tr>
+    <tr>
+      <td><b>39</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c10241/v10241817/1324/LjBN1AWfH7o.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id51411817'>Александр Филичкин</a></td>
+      <td>0 (0)</td>
+      <td><b>2</b> (247)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>2</b></td>
+    </tr>
+    <tr>
+      <td><b>39</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c638019/v638019340/11cee/2XgrqY01BRY.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id20044340'>Саша Милёшин</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>2</b> (481)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>2</b></td>
+    </tr>
+    <tr>
+      <td><b>39</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c636518/v636518866/1ea1f/7CwgDbXKbA8.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id39071866'>Данил Кравченко</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>2</b> (239)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>2</b></td>
+    </tr>
+    <tr>
+      <td><b>39</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c627217/v627217929/7764/Oll6pyU6ySQ.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id22278929'>Антон Кириллов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (131)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (338)</td>
+      <td><b>2</b> (383)</td>
+      <td><b>2</b></td>
+    </tr>
+    <tr>
+      <td><b>46</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c636323/v636323980/2a024/Ks-Mq8Vi6cE.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id19951980'>Иван Шутов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>1</b> (63)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>1</b></td>
+    </tr>
+    <tr>
+      <td><b>46</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c837139/v837139415/85/GDoyAd0W7kQ.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id262406415'>Алексей Поздняков</a></td>
+      <td>0 (0)</td>
+      <td><b>1</b> (191)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>1</b></td>
+    </tr>
+    <tr>
+      <td><b>46</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c636322/v636322279/2a007/HrjXEoN2hxw.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id282049279'>Вячеслав Владимирович</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>1</b> (147)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>1</b></td>
+    </tr>
+    <tr>
+      <td><b>46</b></td>
+      <td><img class = 'dude-img' src = 'https://pp.vk.me/c631619/v631619633/23c1c/qnu0Z4E_tuI.jpg'></td>
+      <td><a class = 'dude-link' href = 'https://vk.com/id2697633'>Владимир Магомедов</a></td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td>0 (0)</td>
+      <td><b>1</b> (161)</td>
+      <td>0 (0)</td>
+      <td>0 (186)</td>
+      <td>0 (0)</td>
+      <td><b>1</b></td>
+    </tr>
+  </tbody>
+</table> </body>
+</html>
